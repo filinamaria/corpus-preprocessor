@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -137,6 +139,56 @@ public class Preprocessor {
 		}
 	}
 	
+	/**
+	 * Untuk mendapatkan daftar kata majemuk
+	 * @param path
+	 * @param outputPath
+	 * @throws IOException 
+	 */
+	public void compoundFinder(String path, String outputPath) throws IOException{
+		File corpusFile = new File(path);
+		
+		BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
+		String line = null;
+		
+		List<String> compoundWords = new ArrayList<String>();
+				
+		while((line = reader.readLine()) != null){
+			if(line.isEmpty()){
+				continue;
+			}
+			
+			String[] compound = null;
+			
+			Pattern pattern = Pattern.compile("\\([a-z|A-Z]* [a-z|A-Z]*\\)");
+			Matcher matcher = pattern.matcher(line);
+			while(matcher.find()){
+				String temp = matcher.group(0).replace("(", "").replace(")", "");
+				compoundWords.add(temp);
+
+				compound = temp.split(" ");
+				
+				line = line.replaceFirst("\\([a-z|A-Z]* [a-z|A-Z]*\\)", compound[0] + "_" + compound[1]);
+				
+				matcher = pattern.matcher(line);
+			}
+		}
+		
+		reader.close();		
+		
+		Set<String> uniqueCompoundWords = new HashSet<String>(compoundWords);
+		
+		File compoundWordsFile = new File(outputPath);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(compoundWordsFile));
+		
+		for(String compoundWord : uniqueCompoundWords){
+			writer.write(compoundWord);
+			writer.write("\n");
+		}
+		
+		writer.close();
+	}
+	
 	public static void main(String [] args) throws IOException, InterruptedException{
 		Preprocessor prep = new Preprocessor();
 		
@@ -194,5 +246,9 @@ public class Preprocessor {
 			writer.close();
 		}
 		
+		// Untuk mendapatkan daftar kata majemuk
+		{
+			prep.compoundFinder(corpus, compoundWords);
+		}
 	}
 }
