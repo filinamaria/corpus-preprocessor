@@ -1,0 +1,12 @@
+Label kalimat majemuk:
+SPOK   : Kami memasukkan pakaian ke dalam lemari
+SPOPel : Dia mengirim saya surat
+SPO    : Mereka sedang menyusun karangan ilmiah
+SPPel  : Anaknya beternak ayam
+SPK    : Mereka berasal dari surabaya
+
+Label kalimat tunggal:
+setara          :
+bertingkat      :
+perluasan objek :
+perluasan subjek:

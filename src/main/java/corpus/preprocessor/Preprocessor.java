@@ -213,7 +213,7 @@ public class Preprocessor {
 		
 		writer.close();*/
 		
-		// Untuk ngubah null object
+		// Untuk mengubah null object
 		{
 			prep.loadTree(editedCorpus);
 			for(int i = 0; i < prep.trees.size(); i++){
