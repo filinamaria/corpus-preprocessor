@@ -1,12 +1,36 @@
-Label kalimat majemuk:
-SPOK   : Kami memasukkan pakaian ke dalam lemari
-SPOPel : Dia mengirim saya surat
-SPO    : Mereka sedang menyusun karangan ilmiah
-SPPel  : Anaknya beternak ayam
-SPK    : Mereka berasal dari surabaya
+Label kalimat tunggal
+tunggal SPOK   : Kami memasukkan pakaian ke dalam lemari
+tunggal SPOPel : Dia mengirim saya surat
+tunggal SPO    : Mereka sedang menyusun karangan ilmiah
+tunggal SPPel  : Anaknya beternak ayam
+tunggal SPK    : Mereka berasal dari surabaya
 
-Label kalimat tunggal:
-setara          :
-bertingkat      :
-perluasan objek :
-perluasan subjek:
+Label kalimat majemuk
+majemuk setara          : Penggabungan dua kalimat atau lebih kalimat tunggal yang kedudukannya sejajar atau sederajat.
+
+						  Penggabungan (dan)
+						  Penguatan (bahkan)
+						  Pemilihan (atau)
+						  Berlawanan (sedangkan)
+						  Urutan waktu (kemudian, lalu, lantas)
+
+majemuk bertingkat      : Penggabungan dua kalimat atau lebih kalimat tunggal yang kedudukannya berbeda. Di dalam kalimat majemuk bertingkat terdapat unsur induk 							  kalimat dan anak kalimat. Anak kalimat timbul akibat perluasan pola yang terdapat pada induk kalimat.
+
+						  Syarat (jika, kalau, manakala, andaikata, asal(kan))
+						  Tujuan (agar, supaya, biar)
+						  Perlawanan (walaupun, kendati(pun), biarpun)
+						  Sebab (sebab, karena, oleh karena)
+						  Akibat (maka, sehingga)
+						  Cara (dengan, tanpa)
+						  Alat (dengan, tanpa)
+						  Perbandingan (seperti, bagaikan, alih-alih)
+						  Penjelasan (bahwa)
+						  Kenyataan (padahal)
+
+majemuk perluasan objek : Kalimat tunggal yang mengalami perluasan pada objek.
+						  Contoh: Kami telah menduga hal itu. (sebelum perluasan)
+						  		  Kami telah menduga bahwa kecelakaan itu adalah kelalaian dari orangtuanya. (setelah perluasan)
+						 
+majemuk perluasan subjek: Kalimat tunggal yang mengalami perluasan pada subjek.
+						  Contoh: Mereka mendapatkan beasiswa di sekolah. (sebelum perluasan)
+						  		  Siswa/ siswi yang berprestasi mendapatkan beasiswa di sekolah. (setelah perluasan)
