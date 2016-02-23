@@ -4,6 +4,7 @@ tunggal SPOPel : Dia mengirim saya surat
 tunggal SPO    : Mereka sedang menyusun karangan ilmiah
 tunggal SPPel  : Anaknya beternak ayam
 tunggal SPK    : Mereka berasal dari surabaya
+tunggal SP     :
 
 Label kalimat majemuk
 majemuk setara          : Penggabungan dua kalimat atau lebih kalimat tunggal yang kedudukannya sejajar atau sederajat.
