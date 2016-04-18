@@ -1,12 +1,16 @@
-Label kalimat tunggal
-tunggal SPOK   : Kami memasukkan pakaian ke dalam lemari
-tunggal SPOPel : Dia mengirim saya surat
-tunggal SPO    : Mereka sedang menyusun karangan ilmiah
-tunggal SPPel  : Anaknya beternak ayam
-tunggal SPK    : Mereka berasal dari surabaya
+-------------------------------------------
+---------- Label kalimat tunggal ----------
+-------------------------------------------
+tunggal SPOK   : Contoh: Kami memasukkan pakaian ke dalam lemari
+tunggal SPOPel : Contoh: Dia mengirim saya surat
+tunggal SPO    : Contoh: Mereka sedang menyusun karangan ilmiah
+tunggal SPPel  : Contoh: Anaknya beternak ayam
+tunggal SPK    : Contoh: Mereka berasal dari surabaya
 tunggal SP     :
 
-Label kalimat majemuk
+-------------------------------------------
+---------- Label kalimat majemuk ----------
+-------------------------------------------
 majemuk setara          : Penggabungan dua kalimat atau lebih kalimat tunggal yang kedudukannya sejajar atau sederajat.
 
 						  Penggabungan (dan)
@@ -35,3 +39,9 @@ majemuk perluasan objek : Kalimat tunggal yang mengalami perluasan pada objek.
 majemuk perluasan subjek: Kalimat tunggal yang mengalami perluasan pada subjek.
 						  Contoh: Mereka mendapatkan beasiswa di sekolah. (sebelum perluasan)
 						  		  Siswa/ siswi yang berprestasi mendapatkan beasiswa di sekolah. (setelah perluasan)
+
+-------------------------------------------
+-------------- Label lainnya --------------
+-------------------------------------------
+kutipan langsung : Jenis kalimat apapun yang berisi kutipan langsung. 
+				   Contoh: "Monyet besar akan dikerahkan di dua stadion tersebut untuk mengusir serbuan monyet kecil, " kata Davender Prasad, pejabat pemerintah 			 kota Delhi kepada kantor berita.

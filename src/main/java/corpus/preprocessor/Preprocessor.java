@@ -26,17 +26,21 @@ public class Preprocessor {
 	public static final String compoundRemovedCorpus = "corpus/2. CompoundRemoved_Indonesian_Treebank.bracket";
 	public static final String editedCorpus = "corpus/3. Edited_Indonesian_Treebank.bracket";
 	public static final String nullObjectCorpus = "corpus/4. nullObjectDeleted.bracket";
-	public static final String incompleteSentenceDelCorpus = "corpus/5. incompleteSentenceDeletedCorpus";
-	
+	public static final String incompleteSentenceDelCorpus = "corpus/5. incompleteSentenceDeletedCorpus.bracket";
+	public static final String nullConjSubordDelCorpus = "corpus/6. nullConjunctionSubordinativeDeletedCorpus.bracket";
+	public static final String rootAddedCorpus = "corpus/7. rootAddedCorpus.bracket";
+	public static final String treebank = "corpus/8. ID-train.treebank";
+		
 	public static final String compoundWords = "corpus/kata_majemuk.txt";
 	
 	public List<Tree> trees;
 	
 	public Preprocessor(){
-		this.trees = new ArrayList<Tree>();
+		
 	}
 	
 	public void loadTree(String path) throws IOException{
+		this.trees = new ArrayList<Tree>();
 		File modelFile = new File(path);
     	
     	BufferedReader reader = new BufferedReader(new FileReader(modelFile));
@@ -77,13 +81,20 @@ public class Preprocessor {
 			
 			String[] compound = null;
 			
-			Pattern pattern = Pattern.compile("\\([a-z|A-Z]* [a-z|A-Z]*\\)");
+			Pattern pattern = Pattern.compile("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)");
 			Matcher matcher = pattern.matcher(line);
 			while(matcher.find()){
 				String temp = matcher.group(0).replace("(", "").replace(")", "");
 				compound = temp.split(" ");
 				
-				line = line.replaceFirst("\\([a-z|A-Z]* [a-z|A-Z]*\\)", compound[0] + "_" + compound[1]);
+				if(compound.length == 4){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1] + "_" + compound[2] + "_" + compound[3]);
+				}else if(compound.length == 3){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1] + "_" + compound[2]);
+				}else if(compound.length == 2){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1]);
+				}
+				
 				
 				matcher = pattern.matcher(line);
 			}
@@ -160,7 +171,7 @@ public class Preprocessor {
 			
 			String[] compound = null;
 			
-			Pattern pattern = Pattern.compile("\\([a-z|A-Z]* [a-z|A-Z]*\\)");
+			Pattern pattern = Pattern.compile("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)");
 			Matcher matcher = pattern.matcher(line);
 			while(matcher.find()){
 				String temp = matcher.group(0).replace("(", "").replace(")", "");
@@ -168,7 +179,13 @@ public class Preprocessor {
 
 				compound = temp.split(" ");
 				
-				line = line.replaceFirst("\\([a-z|A-Z]* [a-z|A-Z]*\\)", compound[0] + "_" + compound[1]);
+				if(compound.length == 4){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1] + "_" + compound[2] + "_" + compound[3]);
+				}else if(compound.length == 3){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1] + "_" + compound[2]);
+				}else if(compound.length == 2){
+					line = line.replaceFirst("\\([a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]* [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*( [a-z|A-Z|0-9]*-?[a-z|A-Z|0-9]*)*?\\)", compound[0] + "_" + compound[1]);
+				}
 				
 				matcher = pattern.matcher(line);
 			}
@@ -189,29 +206,53 @@ public class Preprocessor {
 		writer.close();
 	}
 	
+	public void nullSubordinativeConjunctionModifier(String path, String outputPath) throws IOException{
+		File input = new File(path);
+		BufferedReader reader = new BufferedReader(new FileReader(input));
+		
+		String line = null;
+		
+		File output = new File(outputPath);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(output));
+		
+		while((line = reader.readLine()) != null){
+			if(line.isEmpty()){
+				continue;
+			}
+			
+			String outputString = line.replace("SBAR 0", "SBAR");
+
+			writer.write(outputString);
+			writer.write("\n");
+		}
+		
+		writer.close();
+		reader.close();
+	}
+	
 	public static void main(String [] args) throws IOException, InterruptedException{
 		Preprocessor prep = new Preprocessor();
 		
 		// Untuk modifikasi kata majemuk
-		/*{
+		{
 			prep.removeCompound(corpus, compoundRemovedCorpus);
 			prep.loadTree(compoundRemovedCorpus);
-			
-			System.out.println(prep.trees.get(0).pennString());
-		}*/
-
-		
-		/*File editedCorpusFile = new File(editedCorpus);
-		BufferedWriter writer = null;
-		
-		writer = new BufferedWriter(new FileWriter(editedCorpusFile));
-		
-		for(int i = 0; i < prep.trees.size(); i++){
-			writer.write(prep.trees.get(i).toString());
-			writer.write("\n");
 		}
-		
-		writer.close();*/
+
+		// Untuk merapikan format korpus
+		{
+			File editedCorpusFile = new File(editedCorpus);
+			BufferedWriter writer = null;
+			
+			writer = new BufferedWriter(new FileWriter(editedCorpusFile));
+			
+			for(int i = 0; i < prep.trees.size(); i++){
+				writer.write(prep.trees.get(i).toString());
+				writer.write("\n");
+			}
+			
+			writer.close();
+		}
 		
 		// Untuk mengubah null object
 		{
@@ -249,6 +290,26 @@ public class Preprocessor {
 		// Untuk mendapatkan daftar kata majemuk
 		{
 			prep.compoundFinder(corpus, compoundWords);
+		}
+		
+		// Untuk menghapus konjungsi subordinatif yang tidak ada
+		{
+			prep.nullSubordinativeConjunctionModifier(incompleteSentenceDelCorpus, nullConjSubordDelCorpus);
+		}
+		
+		// Mengubah format korpus menjadi penn String
+		{
+			prep.loadTree(nullConjSubordDelCorpus);
+			
+			File output = new File(rootAddedCorpus);
+			BufferedWriter writer = new BufferedWriter(new FileWriter(output));
+			
+			for(int i = 0; i < prep.trees.size(); i++){
+				writer.write("(ROOT " + prep.trees.get(i).toString() + ")");
+				writer.write("\n");
+			}
+			
+			writer.close();
 		}
 	}
 }
